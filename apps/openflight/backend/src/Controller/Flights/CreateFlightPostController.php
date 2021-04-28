@@ -26,7 +26,7 @@ final class CreateFlightPostController
                 $request->request->getAlpha('destination'),
                 $request->request->get('flight-hours'),
                 $request->request->get('price'),
-                $request->request->getAlpha('currency'),
+                $request->request->get('currency'),
                 $request->request->get('departure-date'),
                 $request->request->getAlpha('aircraft'),
                 $request->request->getAlpha('airline')
