@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Flights;
 
 
-use CodelyTv\OpenFlight\Users\Application\UserRegistration;
+use CodelyTv\OpenFlight\Flights\Application\FlightCreation;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,12 +20,16 @@ final class CreateFlightPostController
     public function __invoke(string $id, Request $request): JsonResponse
     {
         try {
-            $this->$flightCreation->__invoke(
+            $this->flightCreation->__invoke(
                 $id,
-                $request->request->getAlpha('username'),
-                $request->request->getAlpha('name'),
-                $request->request->getAlpha('last_name'),
-                $request->request->get('password')
+                $request->request->getAlpha('origin'),
+                $request->request->getAlpha('destination'),
+                $request->request->get('flight-hours'),
+                $request->request->get('price'),
+                $request->request->getAlpha('currency'),
+                $request->request->get('departure-date'),
+                $request->request->getAlpha('aircraft'),
+                $request->request->getAlpha('airline')
             );
             return new JsonResponse("OK", Response::HTTP_CREATED);
         } catch (DomainError $e) {
