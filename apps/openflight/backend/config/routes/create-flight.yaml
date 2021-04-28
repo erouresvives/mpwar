@@ -1,0 +1,4 @@
+create-flight_post:
+  path: /create-flight/{id}
+  controller: CodelyTv\Apps\OpenFlight\Backend\Controller\Flights\CreateFlightPostController
+  methods: [ POST ]

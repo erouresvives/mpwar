@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac920e85-16bb-45ca-9376-40960ea94f67" name="Default Changelist" comment="" />
+    <list default="true" id="ac920e85-16bb-45ca-9376-40960ea94f67" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/openflight/backend/config/routes/create-flight.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/openflight/backend/src/Controller/Flights/CreateFlightPostController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/EmptyDestination.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/EmptyOrigin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/Flight.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/InvalidFlightHours.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etc/databases/openflight.sql" beforeDir="false" afterPath="$PROJECT_DIR$/etc/databases/openflight.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -159,7 +168,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1riUCHyCqvDnio6r42ApmujQW1I" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -168,13 +179,27 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/OpenFlight/Users/Domain" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/OpenFlight/Flights/Domain" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\33768\Documents\GitHub\mpwar\src\OpenFlight\Flights\Domain" />
+      <recent name="C:\Users\33768\Documents\GitHub\mpwar\apps\openflight\backend\src\Controller\Flights" />
+      <recent name="C:\Users\33768\Documents\GitHub\mpwar\apps\openflight\backend\src\Controller\Users" />
+      <recent name="C:\Users\33768\Documents\GitHub\mpwar\apps\openflight\backend\config\routes" />
       <recent name="C:\Users\33768\Documents\GitHub\mpwar\src\OpenFlight\Users\Domain" />
     </key>
+  </component>
+  <component name="RunManager" selected="Behat.behat.yml">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+    <configuration name="behat.yml" type="PhpBehatConfigurationType">
+      <BehatRunner scope="Yml" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -184,7 +209,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1619458274522</updated>
-      <workItem from="1619458277213" duration="13033000" />
+      <workItem from="1619458277213" duration="13632000" />
+      <workItem from="1619475969825" duration="32000" />
+      <workItem from="1619630635838" duration="1824000" />
     </task>
     <servers />
   </component>
