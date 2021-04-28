@@ -10,6 +10,7 @@ use DateTime;
 class Flight extends AggregateRoot
 {
     const currency_types = ['$', '£', '€'];
+    const departureDateFormat = 'Y-m-d H:i:s';
 
     private Uuid $id;
     private string $origin;
@@ -79,6 +80,14 @@ class Flight extends AggregateRoot
         return new self(
             $id, $origin, $destination, $flightHours, $price, $currency, $departureDate, $aircraft, $airline
         );
+    }
+
+    public static function convertDepartureDateToDatetime(string $departureDate): DateTime {
+        return DateTime::createFromFormat(self::departureDateFormat, $departureDate);
+    }
+
+    public static function convertDepartureDateToString(DateTime $departureDate): string {
+        return $departureDate->format(self::departureDateFormat);
     }
 
     private static function validateOrigin(string $origin): void

@@ -7,7 +7,11 @@
       <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/EmptyOrigin.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/InvalidFlightHours.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/openflight/backend/src/Controller/Flights/CreateFlightPostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/openflight/backend/src/Controller/Flights/CreateFlightPostController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etc/databases/openflight.sql" beforeDir="false" afterPath="$PROJECT_DIR$/etc/databases/openflight.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Flights/Application/FlightCreation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Application/FlightCreation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/Flight.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/Flight.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Flights/Infrastructure/MysqlFlightRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Infrastructure/MysqlFlightRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +213,7 @@
       <updated>1619458274522</updated>
       <workItem from="1619458277213" duration="13632000" />
       <workItem from="1619475969825" duration="32000" />
-      <workItem from="1619630635838" duration="3172000" />
+      <workItem from="1619630635838" duration="5843000" />
     </task>
     <servers />
   </component>
