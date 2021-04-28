@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ac920e85-16bb-45ca-9376-40960ea94f67" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/apps/openflight/backend/config/routes/create-flight.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/openflight/backend/src/Controller/Flights/CreateFlightPostController.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/EmptyDestination.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/EmptyOrigin.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/Flight.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/InvalidFlightHours.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etc/databases/openflight.sql" beforeDir="false" afterPath="$PROJECT_DIR$/etc/databases/openflight.sql" afterDir="false" />
@@ -211,7 +209,7 @@
       <updated>1619458274522</updated>
       <workItem from="1619458277213" duration="13632000" />
       <workItem from="1619475969825" duration="32000" />
-      <workItem from="1619630635838" duration="1824000" />
+      <workItem from="1619630635838" duration="3172000" />
     </task>
     <servers />
   </component>
