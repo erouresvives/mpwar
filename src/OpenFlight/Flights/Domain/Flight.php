@@ -5,9 +5,12 @@ namespace CodelyTv\OpenFlight\Flights\Domain;
 
 use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
+use DateTime;
 
 class Flight extends AggregateRoot
 {
+    const currency_types = ['$', '£', '€'];
+
     private Uuid $id;
     private string $origin;
     private string $destination;
@@ -63,24 +66,89 @@ class Flight extends AggregateRoot
         string $aircraft,
         string $airline
     ): Flight {
-        return new self($id, $origin, $destination, $flightHours, $price, $destination, $departureDate, $destination, $currency, $departureDate, $aircraft, $airline);
+        self::validateOrigin($origin);
+        self::validateDestination($destination);
+        self::validateDifferentOriginDestination($origin, $destination);
+        self::validateFlightHours($flightHours);
+        self::validatePrice($price);
+        self::validateCurrency($currency);
+        self::validateDepartureDate($departureDate);
+        self::validateAircraft($aircraft);
+        self::validateAirline($airline);
+
+        return new self(
+            $id, $origin, $destination, $flightHours, $price, $currency, $departureDate, $aircraft, $airline
+        );
     }
 
-    private static function validateOrigin(string $origin): void{
-        if( $origin === ""){
+    private static function validateOrigin(string $origin): void
+    {
+        if ($origin === "") {
             throw new EmptyOrigin();
         }
     }
 
-    private static function validateDestination(string $destination): void{
-        if( $destination === ""){
+    private static function validateDestination(string $destination): void
+    {
+        if ($destination === "") {
             throw new EmptyDestination();
         }
     }
 
-    private static function validateFlightHours(int $flightHours): void{
-        if( $flightHours < 1){
+    private static function validateDifferentOriginDestination(string $origin, string $destination): void
+    {
+        if ($origin === $destination) {
+            throw new SameOriginDestination();
+        }
+    }
+
+    private static function validateFlightHours(int $flightHours): void
+    {
+        if ($flightHours < 1) {
             throw new InvalidFlightHours();
+        }
+    }
+
+    private static function validatePrice(int $price): void
+    {
+        if ($price < 0) {
+            throw new InvalidPrice();
+        }
+    }
+
+    private static function validateCurrency(string $currency): void
+    {
+        if ($currency === "") {
+            throw new EmptyCurrency();
+        }
+
+        if (!in_array($currency, self::currency_types)) {
+            throw new InvalidCurrency();
+        }
+    }
+
+    private static function validateDepartureDate(DateTime $departureDate): void
+    {
+        if ($departureDate === null) {
+            throw new EmptyDepartureDate();
+        }
+
+        if ($departureDate < new DateTime('NOW')) {
+            throw new InvalidDepartureDate();
+        }
+    }
+
+    private static function validateAircraft(string $aircraft): void
+    {
+        if ($aircraft === "") {
+            throw new EmptyAircraft();
+        }
+    }
+
+    private static function validateAirline(string $airline): void
+    {
+        if ($airline === "") {
+            throw new EmptyAirline();
         }
     }
 
