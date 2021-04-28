@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `flight`;
 CREATE TABLE `flight`
 (
     `Id`             CHAR(36) NOT NULL,
-    `Origin`       TEXT     NOT NULL,
+    `Origin`         TEXT     NOT NULL,
     `Destination`    TEXT     NOT NULL,
     `Flight-hours`   INT      NOT NULL,
     `Price`          INT      NOT NULL,
