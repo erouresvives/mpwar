@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac920e85-16bb-45ca-9376-40960ea94f67" name="Default Changelist" comment="" />
+    <list default="true" id="ac920e85-16bb-45ca-9376-40960ea94f67" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Users/Domain/IncorrectUserName.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Users/Application/UserLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Users/Application/UserLogin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Users/Domain/IncorrectUserCredentials.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Users/Domain/IncorrectPassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Users/Domain/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Users/Domain/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Users/Domain/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Users/Domain/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Users/Infrastructure/MysqlUserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Users/Infrastructure/MysqlUserRepository.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,7 +167,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1riUCHyCqvDnio6r42ApmujQW1I" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

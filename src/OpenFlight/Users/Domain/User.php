@@ -6,6 +6,7 @@ namespace CodelyTv\OpenFlight\Users\Domain;
 
 use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
+use phpDocumentor\Reflection\Types\This;
 
 class User extends AggregateRoot
 {
@@ -64,6 +65,16 @@ class User extends AggregateRoot
         return new self($id, $username, $name, $lastname, $password);
     }
 
+    public static function LoginUser(
+        Uuid $id,
+        string $username,
+        string $name,
+        string $lastname,
+        string $password
+    ): User {
+        return new self($id, $username, $name, $lastname, $password);
+    }
+
     private static function validateName(string $name): void
     {
         if ($name == "") {
@@ -81,7 +92,7 @@ class User extends AggregateRoot
     private static function validateLastName(string $lastname): void
     {
         if ($lastname == "") {
-            throw new IncorrectUserCredentials();
+            throw new EmptyLastName();
         }
     }
 
@@ -89,6 +100,13 @@ class User extends AggregateRoot
     {
         if (!preg_match(self::pattern, $password)) {
             throw new InvalidPassword($password);
+        }
+    }
+
+    public function checkPassword(string $password): void
+    {
+        if ($this->password !== $password) {
+            throw new IncorrectPassword();
         }
     }
 }

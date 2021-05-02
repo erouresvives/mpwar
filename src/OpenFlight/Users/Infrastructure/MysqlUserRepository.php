@@ -6,9 +6,11 @@ declare(strict_types=1);
 namespace CodelyTv\OpenFlight\Users\Infrastructure;
 
 
+use CodelyTv\OpenFlight\Users\Domain\IncorrectUserName;
 use CodelyTv\OpenFlight\Users\Domain\User;
 use CodelyTv\OpenFlight\Users\Domain\UserRepository;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
+use CodelyTv\Shared\Domain\ValueObject\Uuid;
 
 
 final class MysqlUserRepository implements UserRepository
@@ -29,13 +31,19 @@ final class MysqlUserRepository implements UserRepository
         $statement->execute();
     }
 
-    public function findByUsername(string $username): array
+    public function findByUsername(string $username): User
     {
         $sql = 'SELECT * FROM user WHERE username = :username LIMIT 1';
         $statement = $this->mysql->PDO()->prepare($sql);
         $statement->bindValue(':username', $username);
         $statement->execute();
+        $userArr = $statement->fetchAll();
 
-        return $statement->fetchAll();
+        if (empty($userArr)) {
+            throw new IncorrectUserName();
+        }
+
+        $uuid = new Uuid($user["Id"]);
+        return User::LoginUser($uuid, $user["Username"], $user["Name"], $user["LastName"], $user["Password"]);
     }
 }
