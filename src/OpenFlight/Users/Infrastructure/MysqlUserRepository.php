@@ -43,6 +43,7 @@ final class MysqlUserRepository implements UserRepository
             throw new IncorrectUserName();
         }
 
+        $user = $userArr[0];
         $uuid = new Uuid($user["Id"]);
         return User::LoginUser($uuid, $user["Username"], $user["Name"], $user["LastName"], $user["Password"]);
     }
