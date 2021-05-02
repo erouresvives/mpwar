@@ -7,7 +7,7 @@ namespace CodelyTv\OpenFlight\Flights\Application;
 use CodelyTv\OpenFlight\Flights\Domain\Flight;
 use CodelyTv\OpenFlight\Flights\Domain\FlightRepository;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
-use DateTime;
+
 
 class FlightCreation
 {

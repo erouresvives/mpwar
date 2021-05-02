@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac920e85-16bb-45ca-9376-40960ea94f67" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/openflight/backend/config/routes/create-flight.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/EmptyDestination.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/EmptyOrigin.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/InvalidFlightHours.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/openflight/backend/src/Controller/Flights/CreateFlightPostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/openflight/backend/src/Controller/Flights/CreateFlightPostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etc/databases/openflight.sql" beforeDir="false" afterPath="$PROJECT_DIR$/etc/databases/openflight.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OpenFlight/Flights/Application/FlightCreation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Application/FlightCreation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/Flight.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Domain/Flight.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OpenFlight/Flights/Infrastructure/MysqlFlightRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenFlight/Flights/Infrastructure/MysqlFlightRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -8,7 +8,6 @@ namespace CodelyTv\OpenFlight\Flights\Infrastructure;
 
 use CodelyTv\OpenFlight\Flights\Domain\Flight;
 use CodelyTv\OpenFlight\Flights\Domain\FlightRepository;
-use CodelyTv\OpenFlight\Flights\Domain\InvalidDepartureDate;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
 
 
