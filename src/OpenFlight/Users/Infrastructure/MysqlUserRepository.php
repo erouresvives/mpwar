@@ -45,6 +45,6 @@ final class MysqlUserRepository implements UserRepository
 
         $user = $userArr[0];
         $uuid = new Uuid($user["Id"]);
-        return User::LoginUser($uuid, $user["Username"], $user["Name"], $user["LastName"], $user["Password"]);
+        return new User($uuid, $user["Username"], $user["Name"], $user["LastName"], $user["Password"]);
     }
 }
