@@ -22,18 +22,6 @@ class Flight extends AggregateRoot
     private string $aircraft;
     private string $airline;
 
-    /**
-     * Flight constructor.
-     * @param Uuid $id
-     * @param string $origin
-     * @param string $destination
-     * @param int $flightHours
-     * @param int $price
-     * @param string $currency
-     * @param DateTime $departureDate
-     * @param string $aircraft
-     * @param string $airline
-     */
     public function __construct(
         Uuid $id,
         string $origin,
@@ -161,73 +149,46 @@ class Flight extends AggregateRoot
         }
     }
 
-    /**
-     * @return Uuid
-     */
     public function getId(): Uuid
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getOrigin(): string
     {
         return $this->origin;
     }
 
-    /**
-     * @return string
-     */
     public function getDestination(): string
     {
         return $this->destination;
     }
 
-    /**
-     * @return int
-     */
     public function getFlightHours(): int
     {
         return $this->flightHours;
     }
 
-    /**
-     * @return int
-     */
     public function getPrice(): int
     {
         return $this->price;
     }
 
-    /**
-     * @return string
-     */
     public function getCurrency(): string
     {
         return $this->currency;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getDepartureDate(): DateTime
     {
         return $this->departureDate;
     }
 
-    /**
-     * @return string
-     */
     public function getAircraft(): string
     {
         return $this->aircraft;
     }
 
-    /**
-     * @return string
-     */
     public function getAirline(): string
     {
         return $this->airline;
