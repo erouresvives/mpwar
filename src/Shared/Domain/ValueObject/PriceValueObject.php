@@ -4,17 +4,15 @@
 namespace CodelyTv\Shared\Domain\ValueObject;
 
 
-class SeatValueObject
+class PriceValueObject
 {
-    private int $number;
-    private string $letter;
-    private string $class;
+    private int $value;
+    private string $currency;
 
 
-    public function __construct(int $number, string $letter, string $class)
+    public function __construct(int $value, string $currency)
     {
-        $this->number = $number;
-        $this->letter = $letter;
-        $this->class = $class;
+        $this->value = $value;
+        $this->currency = $currency;
     }
 }

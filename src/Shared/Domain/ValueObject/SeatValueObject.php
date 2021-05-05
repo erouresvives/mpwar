@@ -4,7 +4,7 @@
 namespace CodelyTv\Shared\Domain\ValueObject;
 
 
-class Seat
+class SeatValueObject
 {
     private int $number;
     private string $letter;
