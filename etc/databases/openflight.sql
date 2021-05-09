@@ -35,9 +35,9 @@ CREATE TABLE `book`
 (
     `Id`             CHAR(36) NOT NULL,
     `Buy-date`       DATETIME NOT NULL,
-    `Number-seat`    INT      NOT NULL,
-    `Letter-seat`    CHAR(1)  NOT NULL,
-    `Class-seat`     TEXT     NOT NULL,
+    `Number-seat`    INT      NULL,
+    `Letter-seat`    CHAR(1)  NULL,
+    `Class-seat`     TEXT     NULL,
     `Price`          INT      NOT NULL,
     `Currency`       CHAR(1)  NOT NULL,
     `Flight-id`      CHAR(36) NOT NULL,
