@@ -22,14 +22,14 @@ final class MysqlBookRepository implements BookRepository
         $sql = 'INSERT INTO book VALUES(:id, :buyDate, :numberSeat, :letterSeat, :classSeat, :priceValue, :priceCurrency, :flightId, :userId)';
         $statement = $this->mysql->PDO()->prepare($sql);
         $statement->bindValue(':id', $book->getId()->value());
-        $statement->bindValue('buyDate', Book::convertBuyDateToString($book->getBuyDate()));
-        $statement->bindValue('numberSeat', $book->getSeat()->getNumber());
-        $statement->bindValue('letterSeat', $book->getSeat()->getLetter());
-        $statement->bindValue('classSeat', $book->getSeat()->getClass());
-        $statement->bindValue('priceValue', $book->getPrice()->getValue());
-        $statement->bindValue('priceCurrency', $book->getPrice()->getCurrency());
-        $statement->bindValue('flightId', $book->getFlightId()->value());
-        $statement->bindValue('userId', $book->getUserId()->value());
+        $statement->bindValue(':buyDate', Book::convertBuyDateToString($book->getBuyDate()));
+        $statement->bindValue(':numberSeat', $book->getSeat()->getNumber());
+        $statement->bindValue(':letterSeat', $book->getSeat()->getLetter());
+        $statement->bindValue(':classSeat', $book->getSeat()->getClass());
+        $statement->bindValue(':priceValue', $book->getPrice()->getValue());
+        $statement->bindValue(':priceCurrency', $book->getPrice()->getCurrency());
+        $statement->bindValue(':flightId', $book->getFlightId()->value());
+        $statement->bindValue(':userId', $book->getUserId()->value());
 
         $sqlLuggage = 'INSERT INTO luggage VALUES(:id, :type, :weightValue, :weightUnit, :bookId)';
         $statementLuggage = $this->mysql->PDO()->prepare($sqlLuggage);

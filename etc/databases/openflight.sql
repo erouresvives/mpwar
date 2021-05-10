@@ -49,9 +49,10 @@ CREATE TABLE `book`
 DROP TABLE IF EXISTS `luggage`;
 CREATE TABLE `luggage`
 (
-    `Id`       CHAR(36) NOT NULL,
-    `Type`     TEXT     NOT NULL,
-    `Weight`   INT     NOT NULL,
-    `book-id`     CHAR(36) NOT NULL,
+    `Id`            CHAR(36) NOT NULL,
+    `Type`          TEXT     NOT NULL,
+    `Weight-value`        INT     NOT NULL,
+    `Weight-unit`   CHAR(5)     NOT NULL,
+    `book-id`       CHAR(36) NOT NULL,
     PRIMARY KEY (`Id`)
 ) ENGINE = InnoDB;
