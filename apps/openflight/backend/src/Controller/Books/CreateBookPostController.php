@@ -26,13 +26,13 @@ final class CreateBookPostController
                 $request->request->get('number-seat'),
                 $request->request->getAlpha('letter-seat'),
                 $request->request->getAlpha('class-seat'),
-                $request->request->get('valuePrice'),
-                $request->request->getAlpha('currencyPrice'),
-                $request->request->get('flightId'),
-                $request->request->get('userId'),
-                $request->request->getAlpha('luggageType'),
-                $request->request->get('luggageWeightNumber'),
-                $request->request->getAlpha('luggageWightUnit')
+                $request->request->get('value-price'),
+                $request->request->get('currency-price'),
+                $request->request->get('flight-id'),
+                $request->request->get('user-id'),
+                $request->request->getAlpha('luggage-type'),
+                $request->request->get('luggage-weight-number'),
+                $request->request->getAlpha('luggage-weight-unit')
             );
             return new JsonResponse("OK", Response::HTTP_CREATED);
         } catch (DomainError $e) {
