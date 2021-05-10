@@ -6,6 +6,7 @@ namespace CodelyTv\OpenFlight\Flights\Application;
 
 use CodelyTv\OpenFlight\Flights\Domain\Flight;
 use CodelyTv\OpenFlight\Flights\Domain\FlightRepository;
+use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 
 
@@ -34,8 +35,7 @@ class FlightCreation
             $origin,
             $destination,
             intval($flightHours),
-            intval($price),
-            $currency,
+            PriceValueObject::createPrice(intval($price), $currency),
             Flight::convertDepartureDateToDatetime($departureDate),
             $aircraft,
             $airline
