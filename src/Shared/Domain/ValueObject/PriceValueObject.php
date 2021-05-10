@@ -28,7 +28,7 @@ class PriceValueObject
     private static function validateValue(int $value): void
     {
         if ($value < 0) {
-            throw new InvalidCurrency();
+            throw new InvalidPrice();
         }
     }
 

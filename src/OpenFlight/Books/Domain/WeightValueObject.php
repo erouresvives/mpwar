@@ -29,7 +29,7 @@ class WeightValueObject
     private static function validateNumber(int $number)
     {
         if ($number < 0) {
-            throw new InvalidWeightUnit();
+            throw new InvalidWeightNumber();
         }
     }
 

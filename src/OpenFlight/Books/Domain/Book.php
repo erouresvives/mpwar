@@ -63,7 +63,7 @@ class Book extends AggregateRoot
         }
 
         if ($buyDate < new DateTime('NOW')) {
-            throw new InvalidLuggageType();
+            throw new InvalidBuyDate();
         }
     }
 

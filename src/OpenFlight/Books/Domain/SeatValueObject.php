@@ -32,7 +32,7 @@ class SeatValueObject
     private static function validateNumber(int $number)
     {
         if ($number <= 0 || $number === 13) {
-            throw new InvalidLuggageType();
+            throw new InvalidSeatNumber();
         }
     }
 
@@ -46,7 +46,7 @@ class SeatValueObject
     private static function validateClass(string $class)
     {
         if (!in_array($class, self::class_types)) {
-            throw new InvalidLuggageType();
+            throw new InvalidSeatClass();
         }
     }
 
