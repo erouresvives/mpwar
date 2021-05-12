@@ -29,3 +29,30 @@ CREATE TABLE `flight`
     `Airline`        TEXT     NOT NULL,
     PRIMARY KEY (`Id`)
 ) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `book`;
+CREATE TABLE `book`
+(
+    `Id`             CHAR(36) NOT NULL,
+    `Buy-date`       DATETIME NOT NULL,
+    `Number-seat`    INT      NOT NULL,
+    `Letter-seat`    CHAR(1)  NOT NULL,
+    `Class-seat`     TEXT     NOT NULL,
+    `Price`          INT      NOT NULL,
+    `Currency`       CHAR(1)  NOT NULL,
+    `Flight-id`      CHAR(36) NOT NULL,
+    `User-id`        CHAR(36) NOT NULL,
+
+    PRIMARY KEY (`Id`)
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `luggage`;
+CREATE TABLE `luggage`
+(
+    `Id`            CHAR(36) NOT NULL,
+    `Type`          TEXT     NOT NULL,
+    `Weight-value`        INT     NOT NULL,
+    `Weight-unit`   CHAR(5)     NOT NULL,
+    `book-id`       CHAR(36) NOT NULL,
+    PRIMARY KEY (`Id`)
+) ENGINE = InnoDB;

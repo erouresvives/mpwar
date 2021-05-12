@@ -4,20 +4,19 @@
 namespace CodelyTv\OpenFlight\Flights\Domain;
 
 use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
+use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use DateTime;
 
 class Flight extends AggregateRoot
 {
-    const currency_types = ['$', '£', '€'];
     const departureDateFormat = 'Y-m-d H:i:s';
 
     private Uuid $id;
     private string $origin;
     private string $destination;
     private int $flightHours;
-    private int $price;
-    private string $currency;
+    private PriceValueObject $price;
     private DateTime $departureDate;
     private string $aircraft;
     private string $airline;
@@ -27,8 +26,7 @@ class Flight extends AggregateRoot
         string $origin,
         string $destination,
         int $flightHours,
-        int $price,
-        string $currency,
+        PriceValueObject $price,
         DateTime $departureDate,
         string $aircraft,
         string $airline
@@ -38,7 +36,6 @@ class Flight extends AggregateRoot
         $this->destination = $destination;
         $this->flightHours = $flightHours;
         $this->price = $price;
-        $this->currency = $currency;
         $this->departureDate = $departureDate;
         $this->aircraft = $aircraft;
         $this->airline = $airline;
@@ -49,8 +46,7 @@ class Flight extends AggregateRoot
         string $origin,
         string $destination,
         int $flightHours,
-        int $price,
-        string $currency,
+        PriceValueObject $price,
         DateTime $departureDate,
         string $aircraft,
         string $airline
@@ -59,14 +55,12 @@ class Flight extends AggregateRoot
         self::validateDestination($destination);
         self::validateDifferentOriginDestination($origin, $destination);
         self::validateFlightHours($flightHours);
-        self::validatePrice($price);
-        self::validateCurrency($currency);
         self::validateDepartureDate($departureDate);
         self::validateAircraft($aircraft);
         self::validateAirline($airline);
 
         return new self(
-            $id, $origin, $destination, $flightHours, $price, $currency, $departureDate, $aircraft, $airline
+            $id, $origin, $destination, $flightHours, $price, $departureDate, $aircraft, $airline
         );
     }
 
@@ -103,24 +97,6 @@ class Flight extends AggregateRoot
     {
         if ($flightHours < 1) {
             throw new InvalidFlightHours();
-        }
-    }
-
-    private static function validatePrice(int $price): void
-    {
-        if ($price < 0) {
-            throw new InvalidPrice();
-        }
-    }
-
-    private static function validateCurrency(string $currency): void
-    {
-        if ($currency === "") {
-            throw new EmptyCurrency();
-        }
-
-        if (!in_array($currency, self::currency_types)) {
-            throw new InvalidCurrency();
         }
     }
 
@@ -169,14 +145,9 @@ class Flight extends AggregateRoot
         return $this->flightHours;
     }
 
-    public function getPrice(): int
+    public function getPrice(): PriceValueObject
     {
         return $this->price;
-    }
-
-    public function getCurrency(): string
-    {
-        return $this->currency;
     }
 
     public function getDepartureDate(): DateTime

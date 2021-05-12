@@ -1,0 +1,4 @@
+book-flight_post:
+  path: /book-flight/{id}
+  controller: CodelyTv\Apps\OpenFlight\Backend\Controller\Books\CreateBookPostController
+  methods: [ POST ]

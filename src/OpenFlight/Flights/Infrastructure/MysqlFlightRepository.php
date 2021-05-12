@@ -25,8 +25,8 @@ final class MysqlFlightRepository implements FlightRepository
         $statement->bindValue(':origin', $flight->getOrigin());
         $statement->bindValue(':destination', $flight->getDestination());
         $statement->bindValue(':flightHours', $flight->getFlightHours());
-        $statement->bindValue(':price', $flight->getPrice());
-        $statement->bindValue(':currency', $flight->getCurrency());
+        $statement->bindValue(':price', $flight->getPrice()->getValue());
+        $statement->bindValue(':currency', $flight->getPrice()->getCurrency());
         $statement->bindValue(':departureDate', Flight::convertDepartureDateToString($flight->getDepartureDate()));
         $statement->bindValue(':aircraft', $flight->getAircraft());
         $statement->bindValue(':airline', $flight->getAirline());
