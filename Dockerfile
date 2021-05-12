@@ -6,7 +6,7 @@ RUN wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.6.0/pickle.
     && chmod +x /usr/local/bin/pickle
 
 RUN apk --update upgrade \
-    && apk add --no-cache autoconf automake make gcc g++ bash icu-dev libzip-dev rabbitmq-c rabbitmq-c-dev \
+    && apk add --no-cache autoconf automake make gcc g++ bash icu-dev libzip-dev  \
     && docker-php-ext-install -j$(nproc) \
         bcmath \
         opcache \
@@ -16,14 +16,9 @@ RUN apk --update upgrade \
 
 RUN pickle install apcu-5.1.19
 
-ADD etc/infrastructure/php/extensions/rabbitmq.sh /root/install-rabbitmq.sh
-ADD etc/infrastructure/php/extensions/xdebug.sh /root/install-xdebug.sh
 RUN apk add git
-RUN sh /root/install-rabbitmq.sh
-RUN sh /root/install-xdebug.sh
 
 RUN docker-php-ext-enable \
-        amqp \
         apcu \
         opcache
 

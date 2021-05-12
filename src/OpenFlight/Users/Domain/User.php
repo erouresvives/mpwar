@@ -15,13 +15,14 @@ class User extends AggregateRoot
     private string $name;
     private string $lastname;
     private string $password;
-    public function __construct(Uuid $id,string $username, string $name, string $lastname, string $password)
+
+    public function __construct(Uuid $id, string $username, string $name, string $lastname, string $password)
     {
-        $this->id =$id;
-        $this->username =$username;
-        $this->name =$name;
-        $this->lastname =$lastname;
-        $this->password =$password;
+        $this->id = $id;
+        $this->username = $username;
+        $this->name = $name;
+        $this->lastname = $lastname;
+        $this->password = $password;
     }
 
     public function ID(): Uuid
@@ -33,6 +34,7 @@ class User extends AggregateRoot
     {
         return $this->username;
     }
+
     public function Name(): string
     {
         return $this->name;
@@ -48,9 +50,14 @@ class User extends AggregateRoot
         return $this->password;
     }
 
-    public static function RegisterUser(Uuid $id, string $username, string $name, string $lastname, string $password): User
-    {
-        self::validateUserame($username);
+    public static function RegisterUser(
+        Uuid $id,
+        string $username,
+        string $name,
+        string $lastname,
+        string $password
+    ): User {
+        self::validateUsername($username);
         self::validateName($name);
         self::validateLastName($lastname);
         self::validatePassword($password);
@@ -64,7 +71,7 @@ class User extends AggregateRoot
         }
     }
 
-    private static function validateUserame(string $username): void
+    private static function validateUsername(string $username): void
     {
         if ($username == "") {
             throw new EmptyUsername();
@@ -82,6 +89,13 @@ class User extends AggregateRoot
     {
         if (!preg_match(self::pattern, $password)) {
             throw new InvalidPassword($password);
+        }
+    }
+
+    public function Login(string $password): void
+    {
+        if ($this->password !== $password) {
+            throw new IncorrectPassword();
         }
     }
 }

@@ -1,15 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace CodelyTv\OpenFlight\Users\Infrastructure;
 
 
+use CodelyTv\OpenFlight\Users\Domain\IncorrectUserName;
 use CodelyTv\OpenFlight\Users\Domain\User;
 use CodelyTv\OpenFlight\Users\Domain\UserRepository;
-use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
-use function Symfony\Component\String\u;
+use CodelyTv\Shared\Domain\ValueObject\Uuid;
+
 
 final class MysqlUserRepository implements UserRepository
 {
@@ -29,4 +31,20 @@ final class MysqlUserRepository implements UserRepository
         $statement->execute();
     }
 
+    public function findByUsername(string $username): User
+    {
+        $sql = 'SELECT * FROM user WHERE username = :username LIMIT 1';
+        $statement = $this->mysql->PDO()->prepare($sql);
+        $statement->bindValue(':username', $username);
+        $statement->execute();
+        $userArr = $statement->fetchAll();
+
+        if (empty($userArr)) {
+            throw new IncorrectUserName();
+        }
+
+        $user = $userArr[0];
+        $uuid = new Uuid($user["Id"]);
+        return new User($uuid, $user["Username"], $user["Name"], $user["LastName"], $user["Password"]);
+    }
 }
