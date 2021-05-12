@@ -17,7 +17,7 @@ final class MysqlBookRepository implements BookRepository
     {
     }
 
-    public function create(Book $book): void
+    public function save(Book $book): void
     {
         $sql = 'INSERT INTO book VALUES(:id, :buyDate, :numberSeat, :letterSeat, :classSeat, :priceValue, :priceCurrency, :flightId, :userId)';
         $statement = $this->mysql->PDO()->prepare($sql);

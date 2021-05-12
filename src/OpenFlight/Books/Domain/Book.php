@@ -50,8 +50,6 @@ class Book extends AggregateRoot
         Luggage $luggage
     ): Book {
         self::validateBuyDate($buyDate);
-        self::validateFlightId($flightId);
-        self::validateUserId($userId);
 
         return new self($id, $buyDate, $seat, $price, $flightId, $userId, $luggage);
     }
@@ -66,21 +64,6 @@ class Book extends AggregateRoot
             throw new InvalidBuyDate();
         }
     }
-
-    private static function validateFlightId(Uuid $flightId)
-    {
-        if ($flightId === null) {
-            throw new EmptyFlight();
-        }
-    }
-
-    private static function validateUserId(Uuid $userId)
-    {
-        if ($userId === null) {
-            throw new EmptyBook();
-        }
-    }
-
 
     public static function convertBuyDateToDatetime(string $buyDate): DateTime
     {

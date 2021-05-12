@@ -25,7 +25,6 @@ class Luggage
     public static function createLuggage(Uuid $id, string $type, WeightValueObject $weight, Uuid $bookId): Luggage
     {
         self::validateType($type);
-        self::validateBook($bookId);
 
         return new self($id, $type, $weight, $bookId);
     }
@@ -34,13 +33,6 @@ class Luggage
     {
         if ($type === "") {
             throw new InvalidLuggageType();
-        }
-    }
-
-    private static function validateBook(Uuid $bookId)
-    {
-        if ($bookId === null) {
-            throw new EmptyBook();
         }
     }
 

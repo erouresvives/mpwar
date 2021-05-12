@@ -7,6 +7,9 @@ namespace CodelyTv\OpenFlight\Books\Domain;
 class SeatValueObject
 {
 
+    const MINIMUM_SEAT = 0;
+    const INVALID_SEAT = 13;
+
     const class_types = ['first', 'business'];
 
     private int $number;
@@ -31,7 +34,7 @@ class SeatValueObject
 
     private static function validateNumber(int $number)
     {
-        if ($number <= 0 || $number === 13) {
+        if ($number <= self::MINIMUM_SEAT || $number === self::INVALID_SEAT) {
             throw new InvalidSeatNumber();
         }
     }

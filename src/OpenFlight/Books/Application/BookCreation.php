@@ -53,7 +53,7 @@ class BookCreation
             )
         );
 
-        $this->repository->create($book);
+        $this->repository->save($book);
     }
 
 }

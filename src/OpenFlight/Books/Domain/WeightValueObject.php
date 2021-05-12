@@ -6,6 +6,7 @@ namespace CodelyTv\OpenFlight\Books\Domain;
 
 class WeightValueObject
 {
+    const MINIMUM_WEIGHT = 0;
     const unit_types = ['kg', 'lbs'];
 
     private int $number;
@@ -28,7 +29,7 @@ class WeightValueObject
 
     private static function validateNumber(int $number)
     {
-        if ($number < 0) {
+        if ($number < self::MINIMUM_WEIGHT) {
             throw new InvalidWeightNumber();
         }
     }

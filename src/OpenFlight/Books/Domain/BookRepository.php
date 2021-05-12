@@ -5,5 +5,5 @@ namespace CodelyTv\OpenFlight\Books\Domain;
 
 interface BookRepository
 {
-    public function create(Book $book): void;
+    public function save(Book $book): void;
 }
