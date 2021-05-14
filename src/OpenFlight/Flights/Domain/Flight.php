@@ -59,9 +59,19 @@ class Flight extends AggregateRoot
         self::validateAircraft($aircraft);
         self::validateAirline($airline);
 
-        return new self(
+        $flight = new self(
             $id, $origin, $destination, $flightHours, $price, $departureDate, $aircraft, $airline
         );
+        $flight->record(new FlightCreatedDomainEvent($id, $flight->getOrigin(),
+                                                     $flight->getDestination(),
+                                                     $flight->getFlightHours(),
+                                                     $flight->getPrice(),
+                                                     $flight->getDepartureDate(),
+                                                     $flight->getAircraft(),
+                                                     $flight->getAirline()
+                        ));
+        return $flight;
+
     }
 
     public static function convertDepartureDateToDatetime(string $departureDate): DateTime {

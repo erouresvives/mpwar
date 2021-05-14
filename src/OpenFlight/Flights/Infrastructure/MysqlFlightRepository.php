@@ -19,7 +19,7 @@ final class MysqlFlightRepository implements FlightRepository
 
     public function create(Flight $flight): void
     {
-        $sql = 'INSERT INTO flight VALUES(:id, :origin, :destination, :flightHours, :price, :currency, :departureDate, :aircraft, :airline)';
+        $sql = 'INSERT IGNORE INTO flight VALUES(:id, :origin, :destination, :flightHours, :price, :currency, :departureDate, :aircraft, :airline)';
         $statement = $this->mysql->PDO()->prepare($sql);
         $statement->bindValue(':id', $flight->getId()->value());
         $statement->bindValue(':origin', $flight->getOrigin());
