@@ -10,10 +10,6 @@ use CodelyTv\Shared\Domain\Bus\Event\EventBus;
 class UserLogin
 {
 
-    /**
-     * UserLogin constructor.
-     * @param UserRepository $repository
-     */
     public function __construct(private UserRepository $repository, private EventBus $bus)
     {
     }
