@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CodelyTv\OpenFlight\Users\Application;
+namespace CodelyTv\OpenFlight\Users\Application\Login;
 
 
 use CodelyTv\OpenFlight\Users\Domain\UserRepository;
