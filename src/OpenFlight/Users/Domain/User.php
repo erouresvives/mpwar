@@ -61,8 +61,10 @@ class User extends AggregateRoot
         self::validateName($name);
         self::validateLastName($lastname);
         self::validatePassword($password);
-        $user = self($id, $username, $name, $lastname, $password);
-        $user->record(new UserRegisteredDomainEvent($id,$user->Username(), $user->Name(), $user->LastName(),$user->Password()));
+        $user = new self($id, $username, $name, $lastname, $password);
+        $user->record(
+            new UserRegisteredDomainEvent($id, $user->Username(), $user->Name(), $user->LastName(), $user->Password())
+        );
         return $user;
     }
 
@@ -99,5 +101,9 @@ class User extends AggregateRoot
         if ($this->password !== $password) {
             throw new IncorrectPassword();
         }
+
+        $this->record(
+            new UserLoggedDomainEvent($this->id, $this->username, $this->name, $this->lastname, $this->password)
+        );
     }
 }
