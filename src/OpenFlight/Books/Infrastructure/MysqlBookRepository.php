@@ -19,7 +19,7 @@ final class MysqlBookRepository implements BookRepository
 
     public function save(Book $book): void
     {
-        $sql = 'INSERT INTO book VALUES(:id, :buyDate, :numberSeat, :letterSeat, :classSeat, :priceValue, :priceCurrency, :flightId, :userId)';
+        $sql = 'INSERT IGNORE INTO book VALUES(:id, :buyDate, :numberSeat, :letterSeat, :classSeat, :priceValue, :priceCurrency, :flightId, :userId)';
         $statement = $this->mysql->PDO()->prepare($sql);
         $statement->bindValue(':id', $book->getId()->value());
         $statement->bindValue(':buyDate', Book::convertBuyDateToString($book->getBuyDate()));
@@ -31,7 +31,7 @@ final class MysqlBookRepository implements BookRepository
         $statement->bindValue(':flightId', $book->getFlightId()->value());
         $statement->bindValue(':userId', $book->getUserId()->value());
 
-        $sqlLuggage = 'INSERT INTO luggage VALUES(:id, :type, :weightValue, :weightUnit, :bookId)';
+        $sqlLuggage = 'INSERT IGNORE INTO luggage VALUES(:id, :type, :weightValue, :weightUnit, :bookId)';
         $statementLuggage = $this->mysql->PDO()->prepare($sqlLuggage);
         $statementLuggage->bindValue(':id', $book->getLuggage()->getId()->value());
         $statementLuggage->bindValue(':type', $book->getLuggage()->getType());

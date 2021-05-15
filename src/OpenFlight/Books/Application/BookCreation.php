@@ -9,6 +9,7 @@ use CodelyTv\OpenFlight\Books\Domain\BookRepository;
 use CodelyTv\OpenFlight\Books\Domain\Luggage;
 use CodelyTv\OpenFlight\Books\Domain\SeatValueObject;
 use CodelyTv\OpenFlight\Books\Domain\WeightValueObject;
+use CodelyTv\Shared\Domain\Bus\Event\EventBus;
 use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 
@@ -16,7 +17,7 @@ use CodelyTv\Shared\Domain\ValueObject\Uuid;
 class BookCreation
 {
 
-    public function __construct(private BookRepository $repository)
+    public function __construct(private BookRepository $repository, private EventBus $bus)
     {
     }
 
@@ -54,6 +55,7 @@ class BookCreation
         );
 
         $this->repository->save($book);
+        $this->bus->publish(...$book->pullDomainEvents());
     }
 
 }

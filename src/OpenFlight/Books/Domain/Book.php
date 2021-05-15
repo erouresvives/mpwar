@@ -50,8 +50,20 @@ class Book extends AggregateRoot
         Luggage $luggage
     ): Book {
         self::validateBuyDate($buyDate);
+        $book = new self($id, $buyDate, $seat, $price, $flightId, $userId, $luggage);
 
-        return new self($id, $buyDate, $seat, $price, $flightId, $userId, $luggage);
+        $book->record(
+            new BookCreatedDomainEvent(
+                $id,
+                $book->getBuyDate(),
+                $book->getSeat(),
+                $book->getPrice(),
+                $book->getFlightId(),
+                $book->getUserId(),
+                $book->getLuggage()
+            )
+        );
+        return $book;
     }
 
     private static function validateBuyDate(DateTime $buyDate)
