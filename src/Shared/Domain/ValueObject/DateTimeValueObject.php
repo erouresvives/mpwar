@@ -8,6 +8,7 @@ use DateTime;
 
 class DateTimeValueObject
 {
+    const today = "NOW";
     const dateFormat = 'Y-m-d H:i:s';
 
     public function __construct(protected DateTime $value)
@@ -27,5 +28,10 @@ class DateTimeValueObject
     public static function convertDateTimeToString(DateTimeValueObject $date): string
     {
         return $date->value()->format(self::dateFormat);
+    }
+
+    public function isPastDate(): bool
+    {
+        return $this->value < new DateTime(self::today);
     }
 }

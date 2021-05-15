@@ -8,7 +8,6 @@ use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
 use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
-use DateTime;
 
 class Book extends AggregateRoot
 {
@@ -77,7 +76,7 @@ class Book extends AggregateRoot
             throw new EmptyBuyDate();
         }
 
-        if ($buyDate->value() < new DateTime('NOW')) {
+        if ($buyDate->isPastDate()) {
             throw new InvalidBuyDate();
         }
     }

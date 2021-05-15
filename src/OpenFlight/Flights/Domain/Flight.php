@@ -7,7 +7,6 @@ use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
 use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
 use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
-use DateTime;
 
 class Flight extends AggregateRoot
 {
@@ -63,20 +62,20 @@ class Flight extends AggregateRoot
         $flight = new self(
             $id, $origin, $destination, $flightHours, $price, $departureDate, $aircraft, $airline
         );
-        $flight->record(new FlightCreatedDomainEvent($id, $flight->getOrigin(),
-                                                     $flight->getDestination(),
-                                                     $flight->getFlightHours(),
-                                                     $flight->getPrice()->getValue(),
-                                                     $flight->getPrice()->getCurrency(),
-                                                     DateTimeValueObject::convertDateTimeToString($flight->getDepartureDate()),
-                                                     $flight->getAircraft(),
-                                                     $flight->getAirline()
-                        ));
+        $flight->record(
+            new FlightCreatedDomainEvent(
+                $id, $flight->getOrigin(),
+                $flight->getDestination(),
+                $flight->getFlightHours(),
+                $flight->getPrice()->getValue(),
+                $flight->getPrice()->getCurrency(),
+                DateTimeValueObject::convertDateTimeToString($flight->getDepartureDate()),
+                $flight->getAircraft(),
+                $flight->getAirline()
+            )
+        );
         return $flight;
-
     }
-
-
 
     private static function validateOrigin(string $origin): void
     {
@@ -112,7 +111,7 @@ class Flight extends AggregateRoot
             throw new EmptyDepartureDate();
         }
 
-        if ($departureDate->value() < new DateTime('NOW')) {
+        if ($departureDate->isPastDate()) {
             throw new InvalidDepartureDate();
         }
     }
