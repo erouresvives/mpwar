@@ -7,9 +7,7 @@ namespace CodelyTv\OpenFlight\Flights\Domain;
 
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
-use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
-use DateTime;
 
 final class FlightCreatedDomainEvent extends DomainEvent
 {
@@ -17,8 +15,9 @@ final class FlightCreatedDomainEvent extends DomainEvent
     private string $origin;
     private string $destination;
     private int $flightHours;
-    private PriceValueObject $price;
-    private DateTime $departureDate;
+    private int $priceValue;
+    private string $priceCurrency;
+    private string $departureDate;
     private string $aircraft;
     private string $airline;
 
@@ -27,8 +26,9 @@ final class FlightCreatedDomainEvent extends DomainEvent
         string $origin,
         string $destination,
         int $flightHours,
-        PriceValueObject $price,
-        DateTime $departureDate,
+        int $priceValue,
+        string $priceCurrency,
+        string $departureDate,
         string $aircraft,
         string $airline,
         string $eventId = null,
@@ -37,14 +37,16 @@ final class FlightCreatedDomainEvent extends DomainEvent
         $this->origin = $origin;
         $this->destination = $destination;
         $this->flightHours = $flightHours;
-        $this->price = $price;
+        $this->priceValue = $priceValue;
+        $this->priceCurrency = $priceCurrency;
         $this->departureDate = $departureDate;
         $this->aircraft = $aircraft;
         $this->airline = $airline;
         parent::__construct($id->value(), $eventId, $occurredOn);
     }
 
-    public static function fromPrimitives(
+    public
+    static function fromPrimitives(
         string $aggregateId,
         array $body,
         string $eventId,
@@ -55,7 +57,8 @@ final class FlightCreatedDomainEvent extends DomainEvent
             $body["origin"],
             $body["destination"],
             $body["flightHours"],
-            $body["price"],
+            $body["priceValue"],
+            $body["priceCurrency"],
             $body["departureDate"],
             $body["aircraft"],
             $body["airline"],
@@ -64,18 +67,21 @@ final class FlightCreatedDomainEvent extends DomainEvent
         );
     }
 
-    public static function eventName(): string
+    public
+    static function eventName(): string
     {
         return "open_flight.v1.flight.created";
     }
 
-    public function toPrimitives(): array
+    public
+    function toPrimitives(): array
     {
         return [
             "origin" => $this->origin,
             "destination" => $this->destination,
             "flightHours" => $this->flightHours,
-            "price" => $this->price,
+            "priceValue" => $this->priceValue,
+            "priceCurrency" => $this->priceCurrency,
             "departureDate" => $this->departureDate,
             "aircraft" => $this->aircraft,
             "airline" => $this->airline

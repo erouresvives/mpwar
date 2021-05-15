@@ -7,37 +7,53 @@ namespace CodelyTv\OpenFlight\Books\Domain;
 
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
-use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
-use DateTime;
 
 final class BookCreatedDomainEvent extends DomainEvent
 {
 
-    private DateTime $buyDate;
-    private SeatValueObject $seat;
-    private PriceValueObject $price;
-    private Uuid $flightId;
-    private Uuid $userId;
-    private Luggage $luggage;
+    private string $buyDate;
+    private int $seatNumber;
+    private string $seatLetter;
+    private string $seatClass;
+    private int $priceValue;
+    private string $priceCurrency;
+    private string $flightId;
+    private string $userId;
+    private string $luggageId;
+    private string $luggageType;
+    private int $luggageWeightNumber;
+    private string $luggageWeightUnit;
 
     public function __construct(
         Uuid $id,
-        DateTime $buyDate,
-        SeatValueObject $seat,
-        PriceValueObject $price,
-        Uuid $flightId,
-        Uuid $userId,
-        Luggage $luggage,
+        string $buyDate,
+        int $seatNumber,
+        string $seatLetter,
+        string $seatClass,
+        int $priceValue,
+        string $priceCurrency,
+        string $flightId,
+        string $userId,
+        string $luggageId,
+        string $luggageType,
+        int $luggageWeightNumber,
+        string $luggageWeightUnit,
         string $eventId = null,
         string $occurredOn = null
     ) {
         $this->buyDate = $buyDate;
-        $this->seat = $seat;
-        $this->price = $price;
+        $this->seatNumber = $seatNumber;
+        $this->seatLetter = $seatLetter;
+        $this->seatClass = $seatClass;
+        $this->priceValue = $priceValue;
+        $this->priceCurrency = $priceCurrency;
         $this->flightId = $flightId;
         $this->userId = $userId;
-        $this->luggage = $luggage;
+        $this->luggageId = $luggageId;
+        $this->luggageType = $luggageType;
+        $this->luggageWeightNumber = $luggageWeightNumber;
+        $this->luggageWeightUnit = $luggageWeightUnit;
         parent::__construct($id->value(), $eventId, $occurredOn);
     }
 
@@ -50,11 +66,17 @@ final class BookCreatedDomainEvent extends DomainEvent
         return new self(
             new Uuid($aggregateId),
             $body["buyDate"],
-            $body["seat"],
-            $body["price"],
+            $body["seatNumber"],
+            $body["seatLetter"],
+            $body["seatClass"],
+            $body["priceValue"],
+            $body["priceCurrency"],
             $body["flightId"],
             $body["userId"],
-            $body["luggage"],
+            $body["luggageId"],
+            $body["luggageType"],
+            $body["luggageWeightNumber"],
+            $body["luggageWeightUnit"],
             $eventId,
             $occurredOn,
         );
@@ -69,11 +91,17 @@ final class BookCreatedDomainEvent extends DomainEvent
     {
         return [
             "buyDate" => $this->buyDate,
-            "seat" => $this->seat,
-            "price" => $this->price,
+            "seatNumber" => $this->seatNumber,
+            "seatLetter" => $this->seatLetter,
+            "seatClass" => $this->seatClass,
+            "priceValue" => $this->priceValue,
+            "priceCurrency" => $this->priceCurrency,
             "flightId" => $this->flightId,
             "userId" => $this->userId,
-            "luggage" => $this->luggage
+            "luggageId" => $this->luggageId,
+            "luggageType" => $this->luggageType,
+            "luggageWeightNumber" => $this->luggageWeightNumber,
+            "luggageWeightUnit" => $this->luggageWeightUnit
         ];
     }
 }

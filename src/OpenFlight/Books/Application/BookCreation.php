@@ -10,6 +10,7 @@ use CodelyTv\OpenFlight\Books\Domain\Luggage;
 use CodelyTv\OpenFlight\Books\Domain\SeatValueObject;
 use CodelyTv\OpenFlight\Books\Domain\WeightValueObject;
 use CodelyTv\Shared\Domain\Bus\Event\EventBus;
+use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
 use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 
@@ -41,7 +42,7 @@ class BookCreation
 
         $book = Book::CreateBook(
             $bookUuId,
-            Book::convertBuyDateToDatetime($buyDate),
+            DateTimeValueObject::createDateTimeValueObjectFromString($buyDate),
             SeatValueObject::createSeat(intval($numberSeat), $letterSeat, $classSeat),
             PriceValueObject::createPrice(intval($valuePrice), $currencyPrice),
             $flightUuId,

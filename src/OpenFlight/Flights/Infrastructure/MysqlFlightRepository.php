@@ -8,6 +8,7 @@ namespace CodelyTv\OpenFlight\Flights\Infrastructure;
 
 use CodelyTv\OpenFlight\Flights\Domain\Flight;
 use CodelyTv\OpenFlight\Flights\Domain\FlightRepository;
+use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
 
 
@@ -27,7 +28,10 @@ final class MysqlFlightRepository implements FlightRepository
         $statement->bindValue(':flightHours', $flight->getFlightHours());
         $statement->bindValue(':price', $flight->getPrice()->getValue());
         $statement->bindValue(':currency', $flight->getPrice()->getCurrency());
-        $statement->bindValue(':departureDate', Flight::convertDepartureDateToString($flight->getDepartureDate()));
+        $statement->bindValue(
+            ':departureDate',
+            DateTimeValueObject::convertDateTimeToString($flight->getDepartureDate())
+        );
         $statement->bindValue(':aircraft', $flight->getAircraft());
         $statement->bindValue(':airline', $flight->getAirline());
         $statement->execute();
