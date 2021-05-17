@@ -4,20 +4,20 @@
 namespace CodelyTv\OpenFlight\Flights\Domain;
 
 use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
+use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
 use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
-use DateTime;
 
 class Flight extends AggregateRoot
 {
-    const departureDateFormat = 'Y-m-d H:i:s';
+
 
     private Uuid $id;
     private string $origin;
     private string $destination;
     private int $flightHours;
     private PriceValueObject $price;
-    private DateTime $departureDate;
+    private DateTimeValueObject $departureDate;
     private string $aircraft;
     private string $airline;
 
@@ -27,7 +27,7 @@ class Flight extends AggregateRoot
         string $destination,
         int $flightHours,
         PriceValueObject $price,
-        DateTime $departureDate,
+        DateTimeValueObject $departureDate,
         string $aircraft,
         string $airline
     ) {
@@ -47,7 +47,7 @@ class Flight extends AggregateRoot
         string $destination,
         int $flightHours,
         PriceValueObject $price,
-        DateTime $departureDate,
+        DateTimeValueObject $departureDate,
         string $aircraft,
         string $airline
     ): Flight {
@@ -59,17 +59,22 @@ class Flight extends AggregateRoot
         self::validateAircraft($aircraft);
         self::validateAirline($airline);
 
-        return new self(
+        $flight = new self(
             $id, $origin, $destination, $flightHours, $price, $departureDate, $aircraft, $airline
         );
-    }
-
-    public static function convertDepartureDateToDatetime(string $departureDate): DateTime {
-        return DateTime::createFromFormat(self::departureDateFormat, $departureDate);
-    }
-
-    public static function convertDepartureDateToString(DateTime $departureDate): string {
-        return $departureDate->format(self::departureDateFormat);
+        $flight->record(
+            new FlightCreatedDomainEvent(
+                $id, $flight->getOrigin(),
+                $flight->getDestination(),
+                $flight->getFlightHours(),
+                $flight->getPrice()->getValue(),
+                $flight->getPrice()->getCurrency(),
+                DateTimeValueObject::convertDateTimeToString($flight->getDepartureDate()),
+                $flight->getAircraft(),
+                $flight->getAirline()
+            )
+        );
+        return $flight;
     }
 
     private static function validateOrigin(string $origin): void
@@ -100,13 +105,13 @@ class Flight extends AggregateRoot
         }
     }
 
-    private static function validateDepartureDate(DateTime $departureDate): void
+    private static function validateDepartureDate(DateTimeValueObject $departureDate): void
     {
         if ($departureDate === null) {
             throw new EmptyDepartureDate();
         }
 
-        if ($departureDate < new DateTime('NOW')) {
+        if ($departureDate->isPastDate()) {
             throw new InvalidDepartureDate();
         }
     }
@@ -150,7 +155,7 @@ class Flight extends AggregateRoot
         return $this->price;
     }
 
-    public function getDepartureDate(): DateTime
+    public function getDepartureDate(): DateTimeValueObject
     {
         return $this->departureDate;
     }

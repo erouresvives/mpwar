@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace CodelyTv\Shared\Domain\Criteria;
 
-use CodelyTv\Shared\Domain\ValueObject\StringValueObject;
+use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
 
-final class OrderBy extends StringValueObject
+final class OrderBy extends DateTimeValueObject
 {
 }

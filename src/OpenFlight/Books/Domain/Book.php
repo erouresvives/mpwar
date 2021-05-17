@@ -7,15 +7,13 @@ namespace CodelyTv\OpenFlight\Books\Domain;
 use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
 use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
-use DateTime;
+use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
 
 class Book extends AggregateRoot
 {
 
-    const buyDateFormat = 'Y-m-d H:i:s';
-
     private Uuid $id;
-    private DateTime $buyDate;
+    private DateTimeValueObject $buyDate;
     private SeatValueObject $seat;
     private PriceValueObject $price;
     private Uuid $flightId;
@@ -24,7 +22,7 @@ class Book extends AggregateRoot
 
     public function __construct(
         Uuid $id,
-        DateTime $buyDate,
+        DateTimeValueObject $buyDate,
         SeatValueObject $seat,
         PriceValueObject $price,
         Uuid $flightId,
@@ -42,7 +40,7 @@ class Book extends AggregateRoot
 
     public static function CreateBook(
         Uuid $id,
-        DateTime $buyDate,
+        DateTimeValueObject $buyDate,
         SeatValueObject $seat,
         PriceValueObject $price,
         Uuid $flightId,
@@ -50,29 +48,37 @@ class Book extends AggregateRoot
         Luggage $luggage
     ): Book {
         self::validateBuyDate($buyDate);
+        $book = new self($id, $buyDate, $seat, $price, $flightId, $userId, $luggage);
 
-        return new self($id, $buyDate, $seat, $price, $flightId, $userId, $luggage);
+        $book->record(
+            new BookCreatedDomainEvent(
+                $id,
+                DateTimeValueObject::convertDateTimeToString($book->getBuyDate()),
+                $book->getSeat()->getNumber(),
+                $book->getSeat()->getLetter(),
+                $book->getSeat()->getClass(),
+                $book->getPrice()->getValue(),
+                $book->getPrice()->getCurrency(),
+                $book->getFlightId()->value(),
+                $book->getUserId()->value(),
+                $book->getLuggage()->getId()->value(),
+                $book->getLuggage()->getType(),
+                $book->getLuggage()->getWeight()->getNumber(),
+                $book->getLuggage()->getWeight()->getUnit()
+            )
+        );
+        return $book;
     }
 
-    private static function validateBuyDate(DateTime $buyDate)
+    private static function validateBuyDate(DateTimeValueObject $buyDate)
     {
         if ($buyDate === null) {
             throw new EmptyBuyDate();
         }
 
-        if ($buyDate < new DateTime('NOW')) {
+        if ($buyDate->isPastDate()) {
             throw new InvalidBuyDate();
         }
-    }
-
-    public static function convertBuyDateToDatetime(string $buyDate): DateTime
-    {
-        return DateTime::createFromFormat(self::buyDateFormat, $buyDate);
-    }
-
-    public static function convertBuyDateToString(DateTime $buyDate): string
-    {
-        return $buyDate->format(self::buyDateFormat);
     }
 
     public function getId(): Uuid
@@ -80,7 +86,7 @@ class Book extends AggregateRoot
         return $this->id;
     }
 
-    public function getBuyDate(): DateTime
+    public function getBuyDate(): DateTimeValueObject
     {
         return $this->buyDate;
     }

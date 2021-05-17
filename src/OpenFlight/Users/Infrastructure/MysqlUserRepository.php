@@ -21,7 +21,7 @@ final class MysqlUserRepository implements UserRepository
 
     public function Save(User $user): void
     {
-        $sql = 'INSERT INTO user VALUES(:id, :username, :name,:last_name, :password)';
+        $sql = 'INSERT IGNORE INTO user VALUES(:id, :username, :name,:last_name, :password)';
         $statement = $this->mysql->PDO()->prepare($sql);
         $statement->bindValue(':id', $user->ID()->value());
         $statement->bindValue(':username', $user->Username());
