@@ -103,7 +103,7 @@ class User extends AggregateRoot
         }
 
         $this->record(
-            new UserLoggedDomainEvent($this->id, $this->username, $this->name, $this->lastname, $this->password)
+            new UserLoggedDomainEvent($this->id)
         );
     }
 }
