@@ -7,7 +7,6 @@ namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Users;
 
 
 use CodelyTv\OpenFlight\Users\Application\Register\RegisterUserCommand;
-use CodelyTv\Shared\Domain\DomainError;
 use CodelyTv\Shared\Infrastructure\Symfony\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,21 +17,17 @@ final class RegisterPutController extends ApiController
 
     public function __invoke(string $id, Request $request): JsonResponse
     {
-        try {
-            $this->dispatch(
-                new RegisterUserCommand(
-                    $id,
-                    $request->request->getAlpha('username'),
-                    $request->request->getAlpha('name'),
-                    $request->request->getAlpha('last_name'),
-                    $request->request->get('password')
-                )
-            );
+        $this->dispatch(
+            new RegisterUserCommand(
+                $id,
+                $request->request->getAlpha('username'),
+                $request->request->getAlpha('name'),
+                $request->request->getAlpha('last_name'),
+                $request->request->get('password')
+            )
+        );
 
-            return new JsonResponse("OK", Response::HTTP_CREATED);
-        } catch (DomainError $e) {
-            return new JsonResponse($e->getMessage(), Response::HTTP_BAD_REQUEST);
-        }
+        return new JsonResponse("OK", Response::HTTP_CREATED);
     }
 
     protected function exceptions(): array
