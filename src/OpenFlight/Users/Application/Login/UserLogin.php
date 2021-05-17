@@ -14,10 +14,12 @@ class UserLogin
     {
     }
 
-    public function __invoke(string $username, string $password): void
+    public function __invoke(string $username, string $password): LoginUserResponse
     {
         $user = $this->repository->findByUsername($username);
         $user->Login($password);
         $this->bus->publish(...$user->pullDomainEvents());
+
+        return new LoginUserResponse($user->Username(), $user->Name(), $user->LastName());
     }
 }

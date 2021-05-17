@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace CodelyTv\OpenFlight\Users\Application\Login;
 
-use CodelyTv\Shared\Domain\Bus\Command\Command;
+use CodelyTv\Shared\Domain\Bus\Query\Query;
 
-final class LoginUserCommand implements Command
+final class FindUserLoginQuery implements Query
 {
-
     private string $username;
     private string $password;
 
@@ -28,5 +27,4 @@ final class LoginUserCommand implements Command
     {
         return $this->password;
     }
-
 }
