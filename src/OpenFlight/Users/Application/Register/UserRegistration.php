@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CodelyTv\OpenFlight\Users\Application;
+namespace CodelyTv\OpenFlight\Users\Application\Register;
 
 use CodelyTv\OpenFlight\Users\Domain\User;
 use CodelyTv\OpenFlight\Users\Domain\UserRepository;
@@ -15,10 +15,9 @@ class UserRegistration
     {
     }
 
-    public function __invoke(string $id, string $username, string $name, string $lastname, string $password): void
+    public function __invoke(Uuid $id, string $username, string $name, string $lastname, string $password): void
     {
-        $uuid = new Uuid($id);
-        $user = User::RegisterUser($uuid, $username, $name, $lastname, $password);
+        $user = User::RegisterUser($id, $username, $name, $lastname, $password);
         $this->repository->Save($user);
         $this->bus->publish(...$user->pullDomainEvents());
     }

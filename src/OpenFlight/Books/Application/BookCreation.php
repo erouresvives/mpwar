@@ -23,18 +23,13 @@ class BookCreation
     }
 
     public function __invoke(
-        string $id,
-        string $buyDate,
-        string $numberSeat,
-        string $letterSeat,
-        string $classSeat,
-        string $valuePrice,
-        string $currencyPrice,
+        Uuid $id,
+        DateTimeValueObject $buyDate,
+        SeatValueObject $seat,
+        PriceValueObject $price,
         string $flightId,
         string $userId,
-        string $luggageType,
-        string $luggageWeightNumber,
-        string $luggageWightUnit
+        Luggage $luggage
     ): void {
         $bookUuId = new Uuid($id);
         $flightUuId = new Uuid($flightId);
@@ -42,17 +37,12 @@ class BookCreation
 
         $book = Book::CreateBook(
             $bookUuId,
-            DateTimeValueObject::createDateTimeValueObjectFromString($buyDate),
-            SeatValueObject::createSeat(intval($numberSeat), $letterSeat, $classSeat),
-            PriceValueObject::createPrice(intval($valuePrice), $currencyPrice),
+            $buyDate,
+            $seat,
+            $price,
             $flightUuId,
             $userUuId,
-            Luggage::createLuggage(
-                Uuid::random(),
-                $luggageType,
-                WeightValueObject::createWeight(intval($luggageWeightNumber), $luggageWightUnit),
-                $bookUuId
-            )
+            $luggage
         );
 
         $this->repository->save($book);

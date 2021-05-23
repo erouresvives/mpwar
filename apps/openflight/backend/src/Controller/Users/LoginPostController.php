@@ -1,32 +1,40 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Users;
 
 
-use CodelyTv\OpenFlight\Users\Application\UserLogin;
+use CodelyTv\OpenFlight\Users\Application\Login\FindUserLoginQuery;
+use CodelyTv\Shared\Infrastructure\Symfony\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class LoginPostController
+final class LoginPostController extends ApiController
 {
-    public function __construct(private UserLogin $userLogin)
-    {
-    }
-
     public function __invoke(Request $request): JsonResponse
     {
-        try {
-            $this->userLogin->__invoke(
+        $response = $this->ask(
+            new FindUserLoginQuery(
                 $request->request->getAlpha('username'),
                 $request->request->get('password')
-            );
-            return new JsonResponse("OK", Response::HTTP_OK);
-        } catch (DomainError $e) {
-            return new JsonResponse($e->getMessage(), Response::HTTP_BAD_REQUEST);
-        }
+            )
+        );
+
+        return new JsonResponse(
+            [
+                'username' => $response->getUsername(),
+                'name' => $response->getName(),
+                'last-name' => $response->getLastName(),
+            ],
+            Response::HTTP_OK
+        );
     }
 
+    protected function exceptions(): array
+    {
+        return [];
+    }
 }

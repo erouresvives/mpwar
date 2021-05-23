@@ -20,25 +20,23 @@ class FlightCreation
     }
 
     public function __invoke(
-        string $id,
+        Uuid $id,
         string $origin,
         string $destination,
-        string $flightHours,
-        string $price,
-        string $currency,
-        string $departureDate,
+        int $flightHours,
+        PriceValueObject $price,
+        DateTimeValueObject $departureDate,
         string $aircraft,
         string $airline
     ): void {
-        $uuid = new Uuid($id);
 
         $flight = Flight::CreateFlight(
-            $uuid,
+            $id,
             $origin,
             $destination,
-            intval($flightHours),
-            PriceValueObject::createPrice(intval($price), $currency),
-            DateTimeValueObject::createDateTimeValueObjectFromString($departureDate),
+            $flightHours,
+            $price,
+            $departureDate,
             $aircraft,
             $airline
         );
