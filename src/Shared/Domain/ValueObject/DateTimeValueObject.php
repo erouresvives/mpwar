@@ -22,7 +22,8 @@ class DateTimeValueObject
 
     public static function createDateTimeValueObjectFromString(string $date): DateTimeValueObject
     {
-        return new self(DateTime::createFromFormat(self::dateFormat, $date));
+        $dateTime = new DateTime($date);
+        return new self(DateTime::createFromFormat(self::dateFormat, $dateTime->format(self::dateFormat)));
     }
 
     public static function convertDateTimeToString(DateTimeValueObject $date): string
