@@ -39,15 +39,20 @@ final class MysqlFlightRepository implements FlightRepository
         $statement->execute();
     }
 
-    public function findDepartureDateBetweenDates(DateTimeValueObject $fromDate, DateTimeValueObject $toDate): array
-    {
-
-        $sql = 'SELECT * FROM flight WHERE `Departure-date` BETWEEN :fromDate AND :toDate';
+    public function findFlightDestinationBetweenDates(
+        DateTimeValueObject $fromDate,
+        DateTimeValueObject $toDate,
+        string $destination
+    ): array {
+        $sql = 'SELECT * FROM flight WHERE `Destination` = :destination AND `Departure-date` BETWEEN :fromDate AND :toDate';
         $statement = $this->mysql->PDO()->prepare($sql);
-        $statement->bindValue(':fromDate',
+        $statement->bindValue(':destination', $destination);
+        $statement->bindValue(
+            ':fromDate',
             DateTimeValueObject::convertDateTimeToString($fromDate)
         );
-        $statement->bindValue(':toDate',
+        $statement->bindValue(
+            ':toDate',
             DateTimeValueObject::convertDateTimeToString($toDate)
         );
 
@@ -58,14 +63,16 @@ final class MysqlFlightRepository implements FlightRepository
 
         foreach ($flights as $flight) {
             $uuid = new Uuid($flight["Id"]);
-            $foundFlights [] = new Flight($uuid,
+            $foundFlights [] = new Flight(
+                $uuid,
                 $flight["Origin"],
                 $flight["Destination"],
                 intval(["Flight-hours"]),
                 PriceValueObject::createPrice(intval($flight["Price"]), $flight["Currency"]),
                 DateTimeValueObject::createDateTimeValueObjectFromString($flight["Departure-date"]),
                 $flight["Aircraft"],
-                $flight["Airline"]);
+                $flight["Airline"]
+            );
         }
 
         return $foundFlights;

@@ -18,7 +18,8 @@ final class SearchFlightQueryHandler implements QueryHandler
     {
         return $this->searchFlight->__invoke(
             DateTimeValueObject::createDateTimeValueObjectFromString($query->getFromDate()),
-            DateTimeValueObject::createDateTimeValueObjectFromString($query->getToDate())
+            DateTimeValueObject::createDateTimeValueObjectFromString($query->getToDate()),
+            $query->getDestination()
         );
     }
 }

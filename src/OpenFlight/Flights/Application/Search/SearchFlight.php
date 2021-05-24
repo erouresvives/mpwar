@@ -15,9 +15,9 @@ class SearchFlight
     {
     }
 
-    public function __invoke(DateTimeValueObject $fromDate, DateTimeValueObject $toDate): SearchFlightResponse
+    public function __invoke(DateTimeValueObject $fromDate, DateTimeValueObject $toDate, string $destination): SearchFlightResponse
     {
-        $flightsQueryResult = $this->repository->findDepartureDateBetweenDates($fromDate, $toDate);
+        $flightsQueryResult = $this->repository->findFlightDestinationBetweenDates($fromDate, $toDate, $destination);
 
         $flightResponses = [];
         foreach ($flightsQueryResult as $flight) {
