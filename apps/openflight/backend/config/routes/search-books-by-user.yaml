@@ -1,0 +1,4 @@
+search-books-by-user_get:
+  path: /search-booked-flights/{id}
+  controller: CodelyTv\Apps\OpenFlight\Backend\Controller\Books\SearchBooksByUserGetController
+  methods: [ GET ]
