@@ -1,50 +1,33 @@
 <?php
 
-declare(strict_types=1);
 
-namespace CodelyTv\OpenFlight\Flights\Application;
+namespace CodelyTv\OpenFlight\Flights\Application\Search;
 
-use CodelyTv\Shared\Domain\Bus\Command\Command;
+use CodelyTv\Shared\Domain\Bus\Query\Response;
 
-final class CreateFlightCommand implements Command
+final class FlightResponse implements Response
 {
 
-    private string $id;
     private string $origin;
     private string $destination;
     private int $flightHours;
-    private int $priceValue;
-    private string $priceCurrency;
+    private int $price;
+    private string $currency;
     private string $departureDate;
     private string $aircraft;
     private string $airline;
 
-
-    public function __construct(
-        string $id,
-        string $origin,
-        string $destination,
-        int $flightHours,
-        int $priceValue,
-        string $priceCurrency,
-        string $departureDate,
-        string $aircraft,
-        string $airline
-    ) {
-        $this->id = $id;
+    public function __construct(string $origin, string $destination, int $flightHours, string $price, string $currency, string $departureDate,
+                                string $aircraft, string $airline)
+    {
         $this->origin = $origin;
         $this->destination = $destination;
         $this->flightHours = $flightHours;
-        $this->priceValue = $priceValue;
-        $this->priceCurrency = $priceCurrency;
+        $this->price = $price;
+        $this->currency = $currency;
         $this->departureDate = $departureDate;
         $this->aircraft = $aircraft;
         $this->airline = $airline;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getOrigin(): string
@@ -62,14 +45,14 @@ final class CreateFlightCommand implements Command
         return $this->flightHours;
     }
 
-    public function getPriceValue(): int
+    public function getPrice(): int
     {
-        return $this->priceValue;
+        return $this->price;
     }
 
-    public function getPriceCurrency(): string
+    public function getCurrency(): string
     {
-        return $this->priceCurrency;
+        return $this->currency;
     }
 
     public function getDepartureDate(): string

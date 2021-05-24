@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CodelyTv\OpenFlight\Flights\Application;
+namespace CodelyTv\OpenFlight\Flights\Application\Search;
 
 
 use CodelyTv\OpenFlight\Flights\Domain\FlightRepository;
