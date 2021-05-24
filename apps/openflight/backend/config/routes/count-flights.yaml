@@ -1,0 +1,4 @@
+count-flights_get:
+  path: /count-flights
+  controller: CodelyTv\Apps\OpenFlight\Backend\Controller\Flights\CountFlightsGetController
+  methods: [ GET ]
