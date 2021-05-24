@@ -62,6 +62,6 @@ CREATE TABLE `flightCounter`
 (
     `Id`            CHAR(36) NOT NULL,
     `Destination`   TEXT     NOT NULL,
-    `Total-trips`   INT     NOT NULL
+    `Total-trips`   INT     NOT NULL,
     PRIMARY KEY (`Id`)
 ) ENGINE = InnoDB;
