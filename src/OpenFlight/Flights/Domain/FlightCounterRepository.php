@@ -9,5 +9,9 @@ interface FlightCounterRepository
 
     public function update(string $destination): void;
 
+    public function getFlightsCount(): array;
+
     public function getDestinationCount(string $destination): int;
+
+
 }

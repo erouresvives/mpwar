@@ -6,8 +6,12 @@ declare(strict_types=1);
 namespace CodelyTv\OpenFlight\Flights\Infrastructure;
 
 
+use CodelyTv\OpenFlight\Flights\Domain\Flight;
 use CodelyTv\OpenFlight\Flights\Domain\FlightCounter;
 use CodelyTv\OpenFlight\Flights\Domain\FlightCounterRepository;
+use CodelyTv\Shared\Domain\ValueObject\DateTimeValueObject;
+use CodelyTv\Shared\Domain\ValueObject\PriceValueObject;
+use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
 
 
@@ -52,4 +56,23 @@ final class MysqlFlightCounterRepository implements FlightCounterRepository
         return intval($flightCounterArr[0]["Total-trips"]);
     }
 
+    public function getFlightsCount(): array
+    {
+        $sql = 'SELECT * FROM flightCounter';
+        $statement = $this->mysql->PDO()->prepare($sql);
+
+        $statement->execute();
+        $flightCounterArr = $statement->fetchAll();
+
+        $flightsCounter = [];
+
+        foreach ($flightCounterArr as $flightCounter) {
+            $flightsCounter [] = new FlightCounter(
+                new Uuid($flightCounter["Id"]),
+                $flightCounter["Destination"],
+                intval($flightCounter["Total-trips"]));
+        }
+
+        return $flightsCounter;
+    }
 }
