@@ -56,3 +56,12 @@ CREATE TABLE `luggage`
     `book-id`       CHAR(36) NOT NULL,
     PRIMARY KEY (`Id`)
 ) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `flightCounter`;
+CREATE TABLE `flightCounter`
+(
+    `Id`            CHAR(36) NOT NULL,
+    `Destination`   TEXT     NOT NULL,
+    `Total-trips`   INT     NOT NULL,
+    PRIMARY KEY (`Id`)
+) ENGINE = InnoDB;
